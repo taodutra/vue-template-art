@@ -3,6 +3,8 @@
 
 <template>
 	<div>
+		<HeaderBox />
 		<router-view></router-view>
+		<FooterBox />
 	</div>
 </template>
