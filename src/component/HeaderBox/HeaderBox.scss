@@ -1,3 +1,22 @@
 /* stylelint-disable-next-line block-no-empty */
 :local {
+  .header {
+    background: #000;
+  }
+  .nav {
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .item {
+    a {
+      white-space: nowrap;
+      display: block;
+      color: #fff;
+      &.active {
+        color: red;
+      }
+    }
+  }
 }

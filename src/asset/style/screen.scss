@@ -1,3 +1,9 @@
 @import '~normalize.css';
 
 @import 'layout/base';
+@import 'layout/fonts';
+
+body {
+  font-family: 'Oswald---', 'Roboto', serif;
+  font-size: 12px;
+}
