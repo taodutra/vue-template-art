@@ -47,7 +47,10 @@ export default {
   methods: {
     addToReveal() {
       const list = this.$refs.list || [];
-      const config = { activeClass: this.$style.active };
+      const config = {
+        activeClass: this.$style.active,
+        percentReveal: 75,
+      };
       list.forEach(item => {
         this.reveal.add(item, config);
       });

@@ -1,3 +1,33 @@
 /* stylelint-disable-next-line block-no-empty */
 :local {
+  .contact {
+    background: $bg;
+  }
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    width: 90%;
+  }
+  .item {
+    perspective: 600px;
+    width: 70vw;
+    height: 70vw;
+
+    position: relative;
+    margin: 10vh 0;
+    @media (min-width: 768px) {
+      width: 25vw;
+      height: 25vw;
+    }
+    // overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+  }
 }

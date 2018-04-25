@@ -1,4 +1,7 @@
 let instance = null;
+const defaultConfig = {
+  percentReveal: 0,
+};
 
 class Reveal {
   constructor() {
@@ -14,10 +17,23 @@ class Reveal {
    * @param {Object} config
    */
   add($el, config = {}) {
-    this.items = [...this.items, { $el, ...config }];
+    this.items = [...this.items, { $el, ...defaultConfig, ...config }];
+    if (config.forceTransparent) {
+      $el.style.visibility = 'hidden';
+    }
     if (!this.isActive) {
       this.isActive = true;
-      this.check();
+      this.analyzeItems();
+    }
+  }
+  /**
+   * remove
+   * @param {number} index
+   */
+  remove(index = 0) {
+    this.items.splice(index, 1);
+    if (!this.items.length) {
+      this.reset();
     }
   }
   /**
@@ -25,20 +41,33 @@ class Reveal {
    */
   reset() {
     this.isActive = false;
-    this.items = [];
   }
   /**
-   * check
+   * analyzeItems
    */
-  check() {
-    this.items.forEach((item, index) => {
-      if (item.$el.getBoundingClientRect().top < window.innerHeight) {
-        item.$el.classList.add(item.activeClass);
-        this.items.splice(index, 1);
-      }
-    });
+  analyzeItems() {
+    this.items.forEach((item, index) => this.analyzeItem(item, index));
     if (this.isActive) {
-      requestAnimationFrame(() => this.check());
+      requestAnimationFrame(() => this.analyzeItems());
+    }
+  }
+  /**
+   * analyzeItem
+   * @param {HTMLElement} item
+   * @param {number} index
+   */
+  analyzeItem(item, index) {
+    const { top } = item.$el.getBoundingClientRect();
+    const height = item.$el.clientHeight;
+    const y = height * (item.percentReveal / 100) + top;
+    if (y < window.innerHeight) {
+      if (item.activeClass) {
+        item.$el.classList.add(item.activeClass);
+      }
+      if (item.onActivation) {
+        item.onActivation(item.$el, item.onActivationParams);
+      }
+      this.remove(index);
     }
   }
 }
