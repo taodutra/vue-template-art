@@ -3,6 +3,20 @@ const defaultConfig = {
   percentReveal: 0,
 };
 
+/**
+ * getPercentReveal
+ * @param {Object} item
+ */
+const getPercentReveal = item => {
+  const responsiveKey = item.responsivePercentReveal
+    ? Object.keys(item.responsivePercentReveal).find(value => value >= window.innerWidth) || null
+    : null;
+  const percentReveal = responsiveKey
+    ? item.responsivePercentReveal[responsiveKey]
+    : item.percentReveal;
+  return percentReveal;
+};
+
 class Reveal {
   constructor() {
     if (!instance) {
@@ -59,7 +73,8 @@ class Reveal {
   analyzeItem(item, index) {
     const { top } = item.$el.getBoundingClientRect();
     const height = item.$el.clientHeight;
-    const y = height * (item.percentReveal / 100) + top;
+    const percentReveal = getPercentReveal(item);
+    const y = height * (percentReveal / 100) + top;
     if (y < window.innerHeight) {
       if (item.activeClass) {
         item.$el.classList.add(item.activeClass);

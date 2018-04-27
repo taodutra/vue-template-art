@@ -47,18 +47,20 @@
     //     background: $bg;
     //     transition: all $time $ease;
     // }
-    &:nth-child(3n + 2) {
-      transition-delay: 0.25s;
-      &:after,
-      img {
-        transition-delay: $time/4;
+    @media (min-width: 768px) {
+      &:nth-child(3n + 2) {
+        transition-delay: 0.25s;
+        &:after,
+        img {
+          transition-delay: $time/4;
+        }
       }
-    }
-    &:nth-child(3n + 3) {
-      transition-delay: 0.5s;
-      &:after,
-      img {
-        transition-delay: $time/2;
+      &:nth-child(3n + 3) {
+        transition-delay: 0.5s;
+        &:after,
+        img {
+          transition-delay: $time/2;
+        }
       }
     }
     &.active {

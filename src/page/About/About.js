@@ -50,6 +50,10 @@ export default {
       const config = {
         activeClass: this.$style.active,
         percentReveal: 75,
+        responsivePercentReveal: {
+          768: 0,
+          1024: 100,
+        },
       };
       list.forEach(item => {
         this.reveal.add(item, config);

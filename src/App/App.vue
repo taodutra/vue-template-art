@@ -2,9 +2,14 @@
 <script src="./App.js"></script>
 
 <template>
-	<div>
+	<div :class="$style.app">
 		<HeaderBox />
-		<router-view></router-view>
+		<transition
+			@enter="onEnter"
+			@leave="onLeave"
+		>
+			<router-view />
+		</transition>
 		<FooterBox />
 	</div>
 </template>

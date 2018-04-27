@@ -62,10 +62,11 @@ export default {
     },
     onActivation($el, index) {
       const img = $el.querySelector('img');
-      const delay = index * 0.25;
+      const delay = window.innerWidth >= 768 ? index * 0.25 : 0;
       TweenLite.from(img, 1.5, {
-        // scale: 1.25,
-        rotationY: '25deg',
+        rotationY: '45deg',
+        // rotationZ: '-15deg',
+        // rotationX: '15deg',
         ease: Power4.easeOut,
         delay,
       });
